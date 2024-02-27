@@ -1,6 +1,6 @@
 configuration:
   backupStorageLocation:
-  - bucket: <BUCKET NAME>
+  - bucket: velero-k8s-backup-bucket
     provider: aws
   volumeSnapshotLocation:
   - config:
@@ -17,13 +17,10 @@ credentials:
 serviceAccount:
   server:
     annotations:
-      eks.amazonaws.com/role-arn: "arn:aws:iam::{{ include "velero.account_id.value" }}:role/eks-velero-backup"
+      eks.amazonaws.com/role-arn: "arn:aws:iam::${velero-account-id}:role/eks-velero-backup"
     schedule: "0/5 * * * *"
     template:
       ttl: "240h"
       storageLocation: default
       includedNamespaces:
       - "*"
-
-velero:
-  account_id: "{{ secret.velero-account-id.account_id }}"
