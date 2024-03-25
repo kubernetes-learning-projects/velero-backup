@@ -17,12 +17,4 @@ credentials:
 serviceAccount:
   server:
     annotations:
-      eks.amazonaws.com/role-arn: 
-        secretName: velero-role-arn
-        key: eks.amazonaws.com-role-arn
-    schedule: "0/5 * * * *"
-    template:
-      ttl: "240h"
-      storageLocation: default
-      includedNamespaces:
-      - "*"
+      eks.amazonaws.com/role-arn: "arn:aws:iam::{{ .Values.awsAccountId }}:role/eks-velero-backup"
