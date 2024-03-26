@@ -14,4 +14,10 @@ initContainers:
     name: plugins
 credentials:
   useSecret: false
+serviceAccount:
+  server:
+    annotations:
+      eks.amazonaws.com/role-arn: "arn:aws:iam::111111111:role/eks-velero-backup"
+
+
 
